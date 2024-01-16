@@ -1,0 +1,42 @@
+{% assign reveal = "https://cdn.jsdelivr.net/npm/reveal.js@5.0.4" %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ reveal }}/dist/reveal.css">
+    <link rel="stylesheet" href="{{ reveal }}/dist/theme/white.css">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-markdown>
+                <textarea data-template>
+                {{ content }}
+                </textarea>
+            </section>
+        </div>
+    </div>
+    <script src="{{ reveal }}/dist/reveal.js"></script>
+    <script src="{{ reveal }}/plugin/math/math.js"></script>
+    <script src="{{ reveal }}/plugin/markdown/markdown.js"></script>
+    <script>
+        Reveal.initialize({
+            mathjax3: {
+                mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']]
+                },
+                options: {
+                    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+                },
+            },
+            plugins: [RevealMath.MathJax3, RevealMarkdown],
+            hash: true,
+            autoAnimateEasing: 'ease-out',
+            autoAnimateDuration: 0.8,
+            autoAnimateUnmatched: false,
+            center: false,
+        });
+    </script>
+</body>

@@ -1,0 +1,12 @@
+_site
+
+# ignore latex stuff
+*.nav
+*.toc
+*.aux
+*.fls
+*.log
+*.out
+*.fdb_latexmk
+*.synctex.gz
+*.snm

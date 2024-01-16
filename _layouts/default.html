@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  {% if page.title %}
+  <title> {{ page.title }} | CS294-260 </title>
+  {% else %}
+  <title> CS294-260 </title>
+  {% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="{{ page.title }}" />
+  <style>
+    body {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 1em;
+      background-color: antiquewhite;
+      font-size: 120%;
+      line-height: 1.2;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    nav a {
+      padding: 0.5ex;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1 class="center"> Declarative Program Analysis and Optimization </h1>
+    <h3 class="center"> CS294-260, Spring 2024 </h3>
+
+    <nav class="center">
+      <div id="links">
+        <a href="{{ site.baseurl }}/">Home</a>
+        {% assign welcome = site.posts | sort | first %}
+        <a href="{{ welcome.url | relative_url }}">Policies</a>
+        <a href="https://bcourses.berkeley.edu/courses/1532818">bCourses</a>
+        {{ page.nav }}
+      </div>
+    </nav>
+
+    {{ content }}
+  </main>
+</body>
+
+</html>

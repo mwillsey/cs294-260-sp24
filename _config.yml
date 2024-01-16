@@ -1,0 +1,17 @@
+title: Max Willsey
+email: me@mwillsey.com
+description: Max Willsey's personal site.
+url: https://inst.eecs.berkeley.edu
+baseurl: "/~cs294-260/sp24"
+
+permalink: :categories/:year-:month-:day-:title
+
+markdown: kramdown
+kramdown:
+  math_engine: nil
+
+exclude:
+  - Makefile
+  - gen.py
+
+future: true
