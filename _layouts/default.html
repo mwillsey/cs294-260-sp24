@@ -15,7 +15,8 @@
       margin: 0 auto;
       max-width: 1200px;
       padding: 0 1em;
-      background-color: antiquewhite;
+      background-color: #FED;
+      color: #111;
       font-size: 120%;
       line-height: 1.2;
     }
@@ -26,6 +27,13 @@
 
     nav a {
       padding: 0.5ex;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 3em;
+      color: #666;
+      font-size: 70%;
     }
   </style>
 </head>
@@ -47,6 +55,10 @@
 
     {{ content }}
   </main>
+  <footer>
+    Site last updated on {{ site.time | date: "%Y-%m-%d" }}.
+    Edit me on <a href="https://github.com/mwillsey/cs294-260-sp24/blob/main/{{ page.path }}">Github</a>.
+  </footer>
 </body>
 
 </html>

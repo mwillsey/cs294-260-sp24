@@ -1,0 +1,5 @@
+---
+layout: post
+skip: true
+type: holiday
+---
