@@ -29,17 +29,16 @@ The topics of future weeks are subject to change.
     td:nth-child(1) { text-align: right; }
     td:nth-child(2) { padding-right: 0; }
     .holiday td:nth-child(4) { font-style: italic; }
+    .holiday td:nth-child(4)::before { 
+      content: "🏖️"; 
+      font-style: normal;
+      padding-right: 0.2em;
+    }
+    .lecture td:nth-child(4)::before { content: "️Lecture: "; font-weight: bold }
     /* .lecture td:nth-child(4) { font-weight: bold; } */
   </style>
 {% for post in site.posts reversed %}
-  {% if post.skip %}
-    {% assign type = "holiday" %}
-  {% elsif post.lead %}
-    {% assign type = "discussion" %}
-  {% else %}
-    {% assign type = "lecture" %}
-  {% endif %}
-  <tr class="{{ type }}">
+  <tr class="{{ post.type }}">
     <td>
       {% assign week = post.date | date: "%V" | to_i | minus: 2 %}
       {% unless last_week == week %}
@@ -52,10 +51,8 @@ The topics of future weeks are subject to change.
     <td>
       {% if post.skip %}
         {{ post.title }}
-      {% elsif post.lead %}
-        <a href="{{ post.url | relative_url}}">{{ post.title }}</a>
       {% else %}
-        <b>Lecture:</b> <a href="{{ post.url | relative_url}}">{{ post.title }}</a>
+        <a href="{{ post.url | relative_url}}">{{ post.title }}</a>
       {% endif %}
     </td>
     <td>
@@ -63,19 +60,6 @@ The topics of future weeks are subject to change.
     </td>
   </tr>
 {% endfor %}
-  <tr class="holiday">
-    <td>11</td>
-    <td></td>
-    <td></td>
-    <td>Spring Break</td>
-  </tr>
-  <tr class="">
-    <td>12</td>
-    <td></td>
-    <td></td>
-    <td>Project Proposals</td>
-    <td></td>
-  </tr>
   <tr class="">
     <td>13</td>
     <td></td>
