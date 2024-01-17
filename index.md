@@ -6,20 +6,13 @@ layout: default
 - Time: Mon/Wed 14:30-16:00
 - Room: Soda 405
 
-This course aims to give students experience with the implementation and use of
+This course aims to give students experience some of the many
  declarative techniques for program analysis and optimization.
 In particular, we will study term rewriting systems, datalog, and equality saturation.
 
 # Schedule
 
 The topics of future weeks are subject to change.
-
-<style>
-    time {
-        display: inline;
-        float: right;
-    }
-</style>
 
 <table style="border-spacing: 0">
   <thead>
