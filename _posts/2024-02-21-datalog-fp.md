@@ -1,6 +1,6 @@
 ---
 layout: post
-lead: TODO
+lead: Alex, Jeremy
 title: Functional Programming with Datalog
 paper: ./papers/functional-programming-datalog.pdf
 ---

@@ -10,3 +10,5 @@ _site
 *.fdb_latexmk
 *.synctex.gz
 *.snm
+
+notes.md
