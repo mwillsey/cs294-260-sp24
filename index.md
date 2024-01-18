@@ -5,6 +5,12 @@ layout: default
 - Instructor: [Max Willsey](https://mwillsey.com)
 - Time: Mon/Wed 14:30-16:00
 - Room: Soda 405
+- Office Hours in Max's office (Soda 725):
+  - Mon 10:00-11:30
+  - Thu 14:00-15:30
+  - or by appointment
+
+**Please take the [pre-course survey ASAP](https://docs.google.com/forms/d/e/1FAIpQLSdQTYnypi4wtiIMCc8cctW0KTjlcqMbIhyPMySda36L5APyEg/viewform?usp=sf_link)!**
 
 This course aims to give students experience with some of the many
  declarative techniques for program analysis and optimization.
