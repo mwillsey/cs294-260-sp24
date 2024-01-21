@@ -2,23 +2,34 @@
 layout: default
 ---
 
-<h2>{{ page.title }}</h2>
+<style>
+    #post {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+</style>
 
-<ul>
-    <li><time>{{ page.date | date: "%A, %B %-d, %Y" }}</time></li>
-    {% if page.lead %}
-    <li class="lead">Discussion lead: {{ page.lead }}</li>
+<div id="post">
+
+    <h2>{{ page.title }}</h2>
+
     <ul>
-        <li class="lead"> Reading guide due
-            {% assign unix_time = page.date | date: "%s" | to_i %}
-            <b> {{ unix_time | minus: 172800 | date: "%A, %B %-d" }} </b>
-            at 2:30pm
-        </li>
+        <li><time>{{ page.date | date: "%A, %B %-d, %Y" }}</time></li>
+        {% if page.lead %}
+        <li class="lead">Discussion lead: {{ page.lead }}</li>
+        <ul>
+            <li class="lead"> Reading guide due
+                {% assign unix_time = page.date | date: "%s" | to_i %}
+                <b> {{ unix_time | minus: 172800 | date: "%A, %B %-d" }} </b>
+                at 2:30pm
+            </li>
+        </ul>
+        {% endif %}
+        {% if page.paper %}
+        <li><a href="{{ page.paper }}">Paper link</a></li>
+        {% endif %}
     </ul>
-    {% endif %}
-    {% if page.paper %}
-    <li><a href="{{ page.paper }}">Paper link</a></li>
-    {% endif %}
-</ul>
 
-{{ content }}
+    {{ content }}
+
+</div>
