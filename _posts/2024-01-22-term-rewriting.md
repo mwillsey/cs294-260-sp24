@@ -248,8 +248,9 @@ Proving confluence can be involved,
 We can see that our TRS corresponds to a
  pattern-matching
  functional program in the following way:
-- a can only match one of the left-hand sides
+- a term can only match one of the left-hand sides
 - none of the left-hand sides refer to the same variable twice
+
 Such a TRS is called *orthogonal*,
  and orthogonal TRSs are confluent.
 
