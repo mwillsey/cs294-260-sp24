@@ -1,6 +1,6 @@
 ---
 layout: post
-lead: Parker, Eric
+lead: Sora, Eric
 title: "Achieving High Performance the Functional Way: Expressing High-Performance Optimizations as Rewrite Strategies"
 paper: ./papers/high-perf-the-functional-way.pdf
 ---
