@@ -10,8 +10,6 @@ layout: default
   - Thu 14:00-15:30
   - or by appointment
 
-**Please take the [pre-course survey ASAP](https://docs.google.com/forms/d/e/1FAIpQLSdQTYnypi4wtiIMCc8cctW0KTjlcqMbIhyPMySda36L5APyEg/viewform?usp=sf_link)!**
-
 This course aims to give students experience with some of the many
  declarative techniques for program analysis and optimization.
 In particular, we will study term rewriting systems, datalog, and equality saturation.

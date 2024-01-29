@@ -39,7 +39,7 @@ Overall, the authors show that formal verification and synthesis can be used to 
 
 ### Additional Non-Rewriting Background
 
-__Satisfiability modulo theories (SMT) solvers and verification.__ SMT) solvers are tools that determine if a given first-order formula `φ`, which has no free variables and uses symbols from certain background theories, is valid. They return "Yes" if the formula is valid and "No" otherwise.
+__Satisfiability modulo theories (SMT) solvers and verification.__ SMT solvers are tools that determine if a given first-order formula `φ`, which has no free variables and uses symbols from certain background theories, is valid. They return "Yes" if the formula is valid and "No" otherwise.
 
 SMT solvers are good at queries of the form `∃x φ(x)` where `φ` is a quantifier-free formula. They can prove "Yes" by finding a satisfying assignment for the existentially bound variables or "No" by deriving a contradiction using resolution. The Conflict-Driven Clause Learning (CDCL) algorithm [^3] is particularly effective for this purpose.
 
