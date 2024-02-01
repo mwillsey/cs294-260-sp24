@@ -27,7 +27,7 @@ Some things to look out for as you read the paper:
  a. The authors indicate that a type system could address some of these issues - do you think so? 
 3. One of the big concerns of the authors is in separating the algorithm from the schedule, citing the case with TensorFlow where programmers have to change the algorithm in response to the scheduling code, breaking the separation of concerns. Do the authors here actually get out of this? Does writing a good RISE program already require some kind of mental model of how it will be rewritten in ELEVATE, and if so, have we made optimization conceptually easier for programmers actually? 
 
-For more information, you can also check out the full-length version of this paper: https://bastianhagedorn.github.io/files/publications/2020/ICFP-2020.pdf 
+For more information, you can also check out the [full-length version of this pape](https://bastianhagedorn.github.io/files/publications/2020/ICFP-2020.pdf).
 
 See also this short commentary on the paper:
 [Reconsidering the Design of User-Schedulable Languages](https://dl.acm.org/doi/pdf/10.1145/3580370).
@@ -35,3 +35,4 @@ Also, see a
  bigger [survey of rewriting strategies](https://inria.hal.science/hal-01143486/file/HK-RewStrat.pdf)
  or a recent paper on
  [formal semantics for strategies](https://michel.steuwer.info/files/publications/2024/POPL-2024-1.pdf).
+Some of the same folks did another work that used e-graphs to optimize RISE programs as well: [Guided Equality Saturation](https://dl.acm.org/doi/10.1145/3632900).
