@@ -9,6 +9,7 @@ permalink: :categories/:year-:month-:day-:title
 markdown: kramdown
 kramdown:
   math_engine: nil
+  auto_ids: true
 
 exclude:
   - Makefile
