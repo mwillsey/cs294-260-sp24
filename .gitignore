@@ -1,4 +1,6 @@
+# jekyll
 _site
+.jekyll-metadata
 
 # ignore latex stuff
 *.nav
