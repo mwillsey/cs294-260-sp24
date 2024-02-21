@@ -413,3 +413,5 @@ See also:
 
 - [The demand transformation](https://dl.acm.org/doi/abs/10.1145/1836089.1836094)
 - [Magic sets](https://dl.acm.org/doi/10.1145/28659.28689)
+- [Datafun](http://www.rntz.net/datafun/), a system that takes a more formal approach to combine FP with Datalog
+- [Formulog](https://harvardpl.github.io/formulog/), another Datalog with FP features (and SMT!)
