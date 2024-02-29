@@ -2,8 +2,9 @@
 layout: post
 lead: Sora, Shaokai
 title: "Equality Saturation: A New Approach to Optimization"
-paper: "https://arxiv.org/abs/1012.1802"
+paper: "https://dl.acm.org/doi/pdf/10.1145/1480881.1480915"
 ---
+
 # Overview:
 This paper presents a solution to the classic optimization ordering problem found in traditional compilers by using e-graphs and equality saturation. They represent programs as Program Expression Graphs (PEGs) and use optimizations encoded as equalities to saturate E-PEGs, or e-graphs where the nodes are PEGs. Equalities in the resulting E-PEG relate computationally equivalent versions of the input programs. The final, optimized program is selected from the E-PEG using what the authors term a “global profitability heuristic.”
 
