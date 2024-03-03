@@ -5,6 +5,16 @@ title: "Equality Saturation: A New Approach to Optimization"
 paper: "https://dl.acm.org/doi/pdf/10.1145/1480881.1480915"
 ---
 
+<style>
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 80%;
+        max-height: 400px;
+    }
+</style>
+
 # Overview:
 This paper presents a solution to the classic optimization ordering problem found in traditional compilers by using e-graphs and equality saturation. They represent programs as Program Expression Graphs (PEGs) and use optimizations encoded as equalities to saturate E-PEGs, or e-graphs where the nodes are PEGs. Equalities in the resulting E-PEG relate computationally equivalent versions of the input programs. The final, optimized program is selected from the E-PEG using what the authors term a “global profitability heuristic.”
 
@@ -22,7 +32,9 @@ To illustrate the core concepts, the paper uses an elegant running example:
 7: 	}
 8: }
 ```
+
 This program can be optimized using "loop-induction-variable strength reduction," producing the following code:
+
 ```C
 1: i := 0
 2: while (...) {
@@ -33,10 +45,12 @@ This program can be optimized using "loop-induction-variable strength reduction,
 7:	}
 8: }
 ```
+
 ## Formulating a Program Expression Graph (PEG)
 
 To automatically perform this optimization using equality saturation, the authors propose a representation for computations called Program Expression Graphs (PEGs), which represent operators (plus, minus, multiplication, etc.) as nodes and arguments as edges. The original program (top) can be represented as the following PEGs.
-![](eqsat-paper-imgs/a.png)
+
+![]({{ "/assets/pegs/a.png" | relative_url }})
 
 In the PEG above, node 1 (with two outgoing edges pointing to `theta` and `5`) represents `i*5` in the original program. `theta` (node 2) represents the value of `i` throughout the execution, with its left child `0` being the initial value and the right child `phi` representing the value of `theta` in each iteration of the `while` loop. 
 
@@ -57,7 +71,8 @@ Note that theta and phi are the special operator nodes described previously.
 The saturation engine selects “triggers,” i.e., expression patterns where these axioms could be applied. When a trigger matches certain parts of a PEG, the saturation engine invokes a callback function, which adds a new expression to the PEG based on the axioms applied, and draws equivalence edges between the original expression and the new expression, effectively forming an E-PEG!
 
 The graph below shows the E-PEG after applying the three axioms stated above.
-![](eqsat-paper-imgs/b.png)
+
+![]({{"/assets/pegs/b.png" | relative_url }})
 
 Edge A comes from applying axiom 2, edge B from axiom 3, and edge C&D from axiom 1. It’s useful to work out these edges in your head.
 
@@ -66,7 +81,8 @@ This E-PEG now represents *multiple* optimized versions of the input program. Wh
 ## Finding the best version
 
 Choosing the best version from the space of possible optimized programs is the job of a global profitability heuristic (more on this in a later section). In short, the heuristic can pick a subset of nodes from the E-PEG that it thinks is the best. In this example, the heuristic can pick node 6, 8, 10, and 12, resulting in the figure below.
-![](eqsat-paper-imgs/c.png)
+
+![]({{ "/assets/pegs/c.png" | relative_url }})
 
 And this new PEG represents the optimized program at the beginning of this section, and the technique involved happens to be "loop-induction-variable strength reduction"! Pretty cool.
 # Saturation Engine
