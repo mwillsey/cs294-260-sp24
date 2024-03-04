@@ -90,9 +90,13 @@ Choosing the best version from the space of possible optimized programs is the j
 ![]({{ "/assets/pegs/c.png" | relative_url }})
 
 And this new PEG represents the optimized program at the beginning of this section, and the technique involved happens to be "loop-induction-variable strength reduction"! Pretty cool.
+
 # Saturation Engine
+
 In order to encode equalities, the authors implemented a saturation engine to carry out the equality saturation of the E-PEG. They mentioned initially implementing a naive approach in which all axioms were repeatedly checked each time a new equality was added, but finding that this approach was too slow to be tenable. Instead, they turned to an algorithm well known in the AI community known as the Rete algorithm to find instances of triggers for their equality rules in the E-PEG and repeatedly fire the callback functions which added more equalities to the E-PEG. They briefly mentioned using some more restrictive triggers for some rules to prevent an explosion of state in the E-PEG, but did not provide discussion of how they chose triggers beyond this. In addition, they implemented a breadth-first variant of the Rete algorithm to prevent the engine from exploring a single infinitely deep branch of the program space.
+
 # Global Profitability Heuristic
+
 Because of the self-referential nature of many of the PEG nodes, a simple
 minimax algorithm was unavailable in this context to select the optimal program
 from the saturated E-PEG. Instead, they used a Pseudo-Boolean encoding and
@@ -110,17 +114,20 @@ programs represented by the E-PEG. In their performance evaluation, they
 mentioned that this section took the longest, with on average ~1.5s per method
 that they compiled and tested. For more details on the global profitability
 heuristic, check out section 8.3 in the full paper.
+
 Skip:
 Sections 4, 5, 6.1
 
 # Suggested Reading Order:
+
 We suggest the following reading order for the paper:
-(optional) Watch the authors’ [POPL presentation](https://www.youtube.com/watch?v=hL2MARuBCzw) for a high-level overview of the paper and system
-Read Sections 1, 2, and 7 to get a sense of the goals of the paper, and the results they got
-Read Subsections 6.2 and 6.3 to dive into the details of their system
-Read Section 3 for a worked example of arriving at inter-loop strength reduction using Peggy.
-We recommend skipping Sections 4, 5, and 6.1 unless you are interested in how they formalized their approach and the Java-specific obstacles they overcame to implement Peggy.
-The full paper’s layout is almost identical to that of the conference paper, so if you are curious about getting more details, you can also read that. 
+- (optional) Watch the authors’ [POPL presentation](https://www.youtube.com/watch?v=hL2MARuBCzw) for a high-level overview of the paper and system
+- Read Sections 1, 2, and 7 to get a sense of the goals of the paper, and the results they got
+- Read Subsections 6.2 and 6.3 to dive into the details of their system
+- Read Section 3 for a worked example of arriving at inter-loop strength reduction using Peggy.
+- We recommend skipping Sections 4, 5, and 6.1 unless you are interested in how they formalized their approach and the Java-specific obstacles they overcame to implement Peggy.
+- The full paper’s layout is almost identical to that of the conference paper, so if you are curious about getting more details, you can also read that. 
+
 # Further Reading:
 [Full paper](https://arxiv.org/pdf/1012.1802.pdf)
 
