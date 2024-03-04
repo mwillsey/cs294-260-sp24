@@ -52,21 +52,26 @@ To automatically perform this optimization using equality saturation, the author
 
 ![]({{ "/assets/pegs/a.png" | relative_url }})
 
-In the PEG above, node 1 (with two outgoing edges pointing to `theta` and `5`) represents `i*5` in the original program. `theta` (node 2) represents the value of `i` throughout the execution, with its left child `0` being the initial value and the right child `phi` representing the value of `theta` in each iteration of the `while` loop. 
+In the PEG above, node 1 (with two outgoing edges pointing to $\theta$ and `5`) represents `i*5` in the original program. 
+$\theta$ (node 2) represents the value of `i` throughout the execution, with its left child `0` being the initial value and the right child $\phi$ representing the value of $\theta$ in each iteration of the `while` loop. 
 
-Node 3, 4 & 5 encode line 4-7 in the original program. Let’s start with node 3, with a `theta` operator. `theta` takes three arguments and behaves as a selector: the first argument `delta` encodes the branch condition (`...` on line 5), the second argument node 4 encodes the case when the branch condition evaluates to true (`i := i + 3` on line 6 and `i := i + 1` on line 4 are executed), and the third argument node 5 encodes the case when the branch condition evaluates to false (only `i := i + 1` on line 4 is executed). 
+Node 3, 4 & 5 encode line 4-7 in the original program. Let’s start with node 3, with a $\phi$ operator. $\phi$ takes three arguments and behaves as a selector: the first argument $\delta$ encodes the branch condition (`...` on line 5), the second argument node 4 encodes the case when the branch condition evaluates to true (`i := i + 3` on line 6 and `i := i + 1` on line 4 are executed), and the third argument node 5 encodes the case when the branch condition evaluates to false (only `i := i + 1` on line 4 is executed). 
 
-It’s worth noting that the right child of node 5 is actually node 2 (`theta`) because when computing `i + 1` on line 4, the i comes from the previous iteration, whose value is stored in node 2.
+It’s worth noting that the right child of node 5 is actually node 2 ($\theta$) because when computing `i + 1` on line 4, the i comes from the previous iteration, whose value is stored in node 2.
 
 ## From PEG to E-PEG
 
 Once the PEG is formulated for the original program, a saturation engine then tries to generate an E-PEG, which is PEG with equivalence classes (denoted by dash lines), and it does so by applying axioms to the original PEG. There are three sample axioms described in the paper:
 
-(a+b)*m = a*m + b*m
-theta(a,b)*m = theta(a*m, b*m)
-phi(a,b,c) * m = phi(a, b*m, c*m)
+$$
+\begin{align*}
+(a+b)*m &= a*m + b*m \\
+\theta(a,b)*m &= \theta(a*m, b*m) \\
+\phi(a,b,c) * m &= \phi(a, b*m, c*m)
+\end{align*}
+$$
 
-Note that theta and phi are the special operator nodes described previously.
+Note that $\theta$ and $\phi$ are the special operator nodes described previously.
 
 The saturation engine selects “triggers,” i.e., expression patterns where these axioms could be applied. When a trigger matches certain parts of a PEG, the saturation engine invokes a callback function, which adds a new expression to the PEG based on the axioms applied, and draws equivalence edges between the original expression and the new expression, effectively forming an E-PEG!
 
@@ -88,7 +93,23 @@ And this new PEG represents the optimized program at the beginning of this secti
 # Saturation Engine
 In order to encode equalities, the authors implemented a saturation engine to carry out the equality saturation of the E-PEG. They mentioned initially implementing a naive approach in which all axioms were repeatedly checked each time a new equality was added, but finding that this approach was too slow to be tenable. Instead, they turned to an algorithm well known in the AI community known as the Rete algorithm to find instances of triggers for their equality rules in the E-PEG and repeatedly fire the callback functions which added more equalities to the E-PEG. They briefly mentioned using some more restrictive triggers for some rules to prevent an explosion of state in the E-PEG, but did not provide discussion of how they chose triggers beyond this. In addition, they implemented a breadth-first variant of the Rete algorithm to prevent the engine from exploring a single infinitely deep branch of the program space.
 # Global Profitability Heuristic
-Because of the self-referential nature of many of the PEG nodes, a simple minimax algorithm was unavailable in this context to select the optimal program from the saturated E-PEG. Instead, they used a Pseudo-Boolean encoding and solver to solve this problem. Initially, they assigned a constant cost $C_n = basic\_cost(n) * k^{depth(n)}$ to each node, where $basic\_cost(n)$ encoded the inherent cost of that node, $depth(n)$ denoted the loop depth of the node, and $k$ was chosen to be 20 by the authors. Then, they assigned a Pseudo-Boolean variable (a variable with value either 1 or 0) $B_n$ to each node, where a value of 1 meant that the node was chosen to be part of the candidate program. Finally, they initialized a Pseudo-Boolean solver with some constraints which roughly denoted the fact that a well-form program should be chosen, and used it to minimize $\sum_n B_n * C_n$ to find the optimal program in the space of programs represented by the E-PEG. In their performance evaluation, they mentioned that this section took the longest, with on average ~1.5s per method that they compiled and tested. For more details on the global profitability heuristic, check out section 8.3 in the full paper.
+Because of the self-referential nature of many of the PEG nodes, a simple
+minimax algorithm was unavailable in this context to select the optimal program
+from the saturated E-PEG. Instead, they used a Pseudo-Boolean encoding and
+solver to solve this problem. Initially, they assigned a constant cost 
+$C_n = \textsf{basic_cost}(n) * k^{\textsf{depth}(n)}$ to each node, 
+where $\textsf{basic_cost}(n)$ encoded the
+inherent cost of that node, $\textsf{depth}(n)$ denoted the loop depth of the node, and
+$k$ was chosen to be 20 by the authors. Then, they assigned a Pseudo-Boolean
+variable (a variable with value either 1 or 0) $B_n$ to each node, where a value
+of 1 meant that the node was chosen to be part of the candidate program.
+Finally, they initialized a Pseudo-Boolean solver with some constraints which
+roughly denoted the fact that a well-form program should be chosen, and used it
+to minimize $\sum_n B_n * C_n$ to find the optimal program in the space of
+programs represented by the E-PEG. In their performance evaluation, they
+mentioned that this section took the longest, with on average ~1.5s per method
+that they compiled and tested. For more details on the global profitability
+heuristic, check out section 8.3 in the full paper.
 Skip:
 Sections 4, 5, 6.1
 
@@ -105,8 +126,10 @@ The full paper’s layout is almost identical to that of the conference paper, s
 
 [POPL presentation](https://www.youtube.com/watch?v=hL2MARuBCzw)
 # Discussion Questions:
-The authors do not seem to discuss how triggers are selected, and the performance of equality saturation could depend on the selection of triggers. This seems to relate to a well-known problem in Binary Decision Diagrams (BDDs) of selecting a proper variable order, where the selection of variable order also determines the compression power of a BDD. Given that both PEGs and BDDs seem to promote reuse of subgraphs, are these two problems related in a fundamental way?
-Are there certain domains where using equality saturation is NOT such a good idea? In other words, what are the tradeoffs?
-How would you design a saturation engine based on Datalog?
-What is the expressiveness of PEGs? What type of programs cannot be encoded in this formalism?
-Could this approach be reworked to another domain where the performance of program extraction could be improved?
+- The authors do not seem to discuss how triggers are selected, and the performance of equality saturation could depend on the selection of triggers.
+    - This seems to relate to a well-known problem in Binary Decision Diagrams (BDDs) of selecting a proper variable order, where the selection of variable order also determines the compression power of a BDD.
+    - Given that both PEGs and BDDs seem to promote reuse of subgraphs, are these two problems related in a fundamental way?
+- Are there certain domains where using equality saturation is NOT such a good idea? In other words, what are the tradeoffs?
+- How would you design a saturation engine based on Datalog?
+- What is the expressiveness of PEGs? What type of programs cannot be encoded in this formalism?
+- Could this approach be reworked to another domain where the performance of program extraction could be improved?
