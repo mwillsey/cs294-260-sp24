@@ -15,7 +15,7 @@ In this work, the authors focus on optimizing “datapaths,” which in this wor
 
 This paper’s main contribution is applying e-graphs to the problem of datapath optimization. They work on the RTL level, transforming Verilog code into an e-graph and defining arithmetic and logical rewrite rules. The problem translates into e-graphs quite similarly to previous applications of e-graphs, with the added complication of bitwidth. Each bitvector has a specified width, and this induces constraints on which rewrites can be performed. For instance, for the rewrite rule:  
 
-${\,}_r( _pa \times {\,}_q(_sb + {\,}_tc)) \rightarrow {\,}_r(_u(_pa \times {\,}_sb) + {\,}_v(_pa \times {\,}_tc))$ 
+${\,}_r( _pa \times {\,}_q(_sb + {\,}_tc)) \rightarrow {\,}_r(_u(_pa \times {\,}_sb) + {\,}_v(_pa \times {\,}_tc))$ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(left subscripts denote bit width)
 
 The constraint $\min(q, u, v) \geq r$ is applied, so that all the inner bit vectors have enough width to match the output bit vector.
 The other part of the e-graph work is the extraction algorithm. The authors define an ILP encoding, but don’t always use it, opting to use the default egg extraction when possible, for performance reasons. They also define a cost metric for evaluating the cost of individual e-nodes which computes the theoretical area that each operator would take up given the input and output bitwidth. This differs from the area that will actually be synthesized, due to the inherent noise in synthesis tools. However, the performance benefit from using this metric makes this tradeoff worth it. The authors address this noisiness in Section V
