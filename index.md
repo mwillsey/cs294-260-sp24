@@ -82,14 +82,14 @@ The topics of future weeks are subject to change.
     <td>15</td>
     <td>Mon</td>
     <td>4-22</td>
-    <td>Project Presentations</td>
+    <td><a href="{{ 'projects' | relative_url }}">Project Presentations</a></td>
     <td></td>
   </tr>
   <tr class="">
     <td></td>
     <td>Wed</td>
     <td>4-24</td>
-    <td>Project Presentations</td>
+    <td><a href="{{ 'projects' | relative_url }}">Project Presentations</a></td>
     <td></td>
   </tr>
 </table>

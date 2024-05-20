@@ -1,0 +1,50 @@
+---
+layout: default
+---
+
+<style>
+    #post {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    td {
+        padding: 0.5em;
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: #00000011;
+    }
+</style>
+
+<div id="post" class="content">
+
+    <p>
+        <a href="{{ site.baseurl }}/projects">Back to Final Projects</a>
+    </p>
+
+    <h1>{{ page.title }}</h1>
+
+    <ul>
+        <li>
+            Final Project by
+            {{ page | map: "authors" | join: ", " | markdownify | remove: "<p>" | remove: "</p>" }}
+        </li>
+        {% for link in page.links %}
+        <li>
+            {{ link | markdownify | remove: "<p>" | remove: "</p>" }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    {{ content }}
+
+    <p>
+        <a href="{{ site.baseurl }}/projects">Back to Final Projects</a>
+    </p>
+</div>
